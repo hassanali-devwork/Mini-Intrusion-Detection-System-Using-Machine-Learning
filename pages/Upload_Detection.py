@@ -1,13 +1,4 @@
 
-"""
-Upload & Detection Page
-Network Intrusion Detection System
-
-Premium minimal cybersecurity interface.
-No logos or brand graphics.
-Original ML detection pipeline preserved.
-"""
-
 from pathlib import Path
 import textwrap
 
@@ -36,35 +27,20 @@ def apply_design():
     st.markdown("""
     <style>
 
-    /* GLOBAL */
-
     .stApp {
-        background:
-            radial-gradient(
-                circle at 5% 0%,
-                rgba(79, 70, 229, 0.12),
-                transparent 35%
-            ),
-            radial-gradient(
-                circle at 95% 10%,
-                rgba(6, 182, 212, 0.08),
-                transparent 35%
-            ),
-            #080d1a;
-
+        background: radial-gradient(circle at 5% 0%, rgba(79, 70, 229, 0.12), transparent 35%),
+                    radial-gradient(circle at 95% 10%, rgba(6, 182, 212, 0.08), transparent 35%),
+                    #080d1a;
         color: #e2e8f0;
     }
 
     .block-container {
         max-width: 1450px;
-        padding-top: 2rem;
-        padding-bottom: 4rem;
+        padding: 2rem 1rem 4rem;
     }
 
-    /* PAGE HEADER */
-
     .page-header {
-        padding: 32px 0 25px 0;
+        padding: 32px 0 25px;
         border-bottom: 1px solid rgba(148,163,184,0.15);
         margin-bottom: 30px;
     }
@@ -94,8 +70,6 @@ def apply_design():
         max-width: 750px;
     }
 
-    /* SECTION HEADINGS */
-
     .section-heading {
         font-size: 1.35rem;
         font-weight: 800;
@@ -109,16 +83,8 @@ def apply_design():
         margin-bottom: 20px;
     }
 
-    /* INSTRUCTION PANEL */
-
     .instruction-panel {
-        background:
-            linear-gradient(
-                120deg,
-                rgba(30,41,80,0.65),
-                rgba(15,23,42,0.85)
-            );
-
+        background: linear-gradient(120deg, rgba(30,41,80,0.65), rgba(15,23,42,0.85));
         border: 1px solid rgba(129,140,248,0.23);
         border-radius: 17px;
         padding: 24px;
@@ -153,16 +119,8 @@ def apply_design():
         margin-bottom: 5px;
     }
 
-    /* UPLOAD PANEL */
-
     .upload-panel {
-        background:
-            linear-gradient(
-                145deg,
-                rgba(20,30,53,0.95),
-                rgba(12,19,35,0.98)
-            );
-
+        background: linear-gradient(145deg, rgba(20,30,53,0.95), rgba(12,19,35,0.98));
         border: 1px solid rgba(129,140,248,0.24);
         border-radius: 22px;
         padding: 30px;
@@ -204,8 +162,6 @@ def apply_design():
         color: #e2e8f0 !important;
     }
 
-    /* FILE INFORMATION */
-
     .file-card {
         background: rgba(17,27,48,0.9);
         border: 1px solid rgba(148,163,184,0.14);
@@ -228,16 +184,8 @@ def apply_design():
         overflow-wrap: anywhere;
     }
 
-    /* METRIC CARDS */
-
     .metric-card {
-        background:
-            linear-gradient(
-                145deg,
-                rgba(22,32,55,0.96),
-                rgba(12,19,35,0.98)
-            );
-
+        background: linear-gradient(145deg, rgba(22,32,55,0.96), rgba(12,19,35,0.98));
         border: 1px solid rgba(148,163,184,0.14);
         border-radius: 17px;
         padding: 23px 20px;
@@ -281,16 +229,8 @@ def apply_design():
         border-left: 4px solid #22d3ee;
     }
 
-    /* RESULT PANEL */
-
     .success-panel {
-        background:
-            linear-gradient(
-                120deg,
-                rgba(6,78,59,0.22),
-                rgba(15,23,42,0.92)
-            );
-
+        background: linear-gradient(120deg, rgba(6,78,59,0.22), rgba(15,23,42,0.92));
         border: 1px solid rgba(52,211,153,0.35);
         border-radius: 18px;
         padding: 25px;
@@ -308,8 +248,6 @@ def apply_design():
         color: #a7f3d0;
         font-size: 0.88rem;
     }
-
-    /* EMPTY STATE */
 
     .empty-panel {
         background: rgba(17,27,48,0.75);
@@ -332,8 +270,6 @@ def apply_design():
         line-height: 1.7;
     }
 
-    /* EXPECTED FORMAT */
-
     .format-panel {
         background: rgba(17,27,48,0.85);
         border: 1px solid rgba(148,163,184,0.13);
@@ -349,8 +285,6 @@ def apply_design():
         overflow-wrap: anywhere;
     }
 
-    /* STREAMLIT BUTTONS */
-
     .stButton button {
         min-height: 49px;
         border-radius: 11px;
@@ -363,21 +297,15 @@ def apply_design():
         box-shadow: 0 8px 22px rgba(99,102,241,0.2);
     }
 
-    /* DATAFRAME */
-
     [data-testid="stDataFrame"] {
         border: 1px solid rgba(148,163,184,0.15);
         border-radius: 12px;
         overflow: hidden;
     }
 
-    /* ALERTS */
-
     [data-testid="stAlert"] {
         border-radius: 12px;
     }
-
-    /* FOOTER */
 
     .page-footer {
         border-top: 1px solid rgba(148,163,184,0.13);
@@ -842,7 +770,7 @@ def show_detection_summary(predictions):
 
     # Distribution bar
 
-    st.markdown("#### Traffic classification distribution")
+    st.markdown("#### Traffic Classification Distribution")
 
     st.progress(
         benign_count / total_records if total_records else 0,

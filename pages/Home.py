@@ -1,19 +1,3 @@
-"""
-Premium Home Page - Network Intrusion Detection System
-
-Features:
-- Modern cybersecurity landing page
-- Premium dark glassmorphism theme
-- Animated gradient hero section
-- Dataset statistics dashboard
-- Model performance metrics
-- Interactive confusion 
-- Training information
-- Dataset metadata
-- Visual system workflow
-- Random Forest model details
-"""
-
 import json
 from pathlib import Path
 from textwrap import dedent
@@ -77,35 +61,17 @@ def apply_home_design():
     render_html(dedent("""
     <style>
 
-    /* ========================================
-       GLOBAL BACKGROUND
-    ======================================== */
-
     .stApp {
-        background:
-            radial-gradient(
-                ellipse at 10% 0%,
-                rgba(79, 70, 229, 0.14),
-                transparent 40%
-            ),
-            radial-gradient(
-                ellipse at 95% 15%,
-                rgba(6, 182, 212, 0.10),
-                transparent 40%
-            ),
-            #080d1a;
+        background: radial-gradient(ellipse at 10% 0%, rgba(79, 70, 229, 0.14), transparent 40%),
+                    radial-gradient(ellipse at 95% 15%, rgba(6, 182, 212, 0.10), transparent 40%),
+                    #080d1a;
         color: #e2e8f0;
     }
 
     .block-container {
         max-width: 1500px;
-        padding-top: 1.8rem;
-        padding-bottom: 3rem;
+        padding: 1.8rem 1rem 3rem;
     }
-
-    /* ========================================
-       HERO SECTION
-    ======================================== */
 
     .hero-container {
         position: relative;
@@ -113,17 +79,9 @@ def apply_home_design():
         padding: 65px 35px;
         border-radius: 26px;
         text-align: center;
-        background:
-            linear-gradient(
-                135deg,
-                rgba(49, 46, 129, 0.35),
-                rgba(15, 23, 42, 0.95),
-                rgba(8, 145, 178, 0.16)
-            );
+        background: linear-gradient(135deg, rgba(49, 46, 129, 0.35), rgba(15, 23, 42, 0.95), rgba(8, 145, 178, 0.16));
         border: 1px solid rgba(129, 140, 248, 0.25);
-        box-shadow:
-            0 20px 60px rgba(0, 0, 0, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
         margin-bottom: 25px;
     }
 
@@ -184,16 +142,11 @@ def apply_home_design():
         font-weight: 600;
     }
 
-    /* ========================================
-       SECTION HEADINGS
-    ======================================== */
-
     .section-title {
         color: #f8fafc;
         font-size: 1.55rem;
         font-weight: 800;
-        margin-top: 12px;
-        margin-bottom: 5px;
+        margin: 12px 0 5px;
     }
 
     .section-description {
@@ -202,17 +155,8 @@ def apply_home_design():
         margin-bottom: 22px;
     }
 
-    /* ========================================
-       KPI CARDS
-    ======================================== */
-
     .stat-card {
-        background:
-            linear-gradient(
-                145deg,
-                rgba(22, 32, 55, 0.95),
-                rgba(13, 20, 37, 0.96)
-            );
+        background: linear-gradient(145deg, rgba(22, 32, 55, 0.95), rgba(13, 20, 37, 0.96));
         border: 1px solid rgba(148, 163, 184, 0.14);
         border-radius: 17px;
         padding: 23px 20px;
@@ -263,10 +207,6 @@ def apply_home_design():
         border-left: 4px solid #f472b6;
     }
 
-    /* ========================================
-       INFORMATION PANELS
-    ======================================== */
-
     .glass-card {
         background: rgba(17, 26, 46, 0.85);
         border: 1px solid rgba(148, 163, 184, 0.13);
@@ -288,17 +228,8 @@ def apply_home_design():
         line-height: 1.8;
     }
 
-    /* ========================================
-       WORKFLOW CARDS
-    ======================================== */
-
     .workflow-card {
-        background:
-            linear-gradient(
-                145deg,
-                rgba(22, 32, 55, 0.95),
-                rgba(13, 20, 37, 0.96)
-            );
+        background: linear-gradient(145deg, rgba(22, 32, 55, 0.95), rgba(13, 20, 37, 0.96));
         border: 1px solid rgba(148, 163, 184, 0.14);
         border-radius: 16px;
         padding: 22px 18px;
@@ -319,10 +250,6 @@ def apply_home_design():
         margin-bottom: 15px;
     }
 
-    .workflow-icon {
-        font-size: 1.8rem;
-        margin-bottom: 12px;
-    }
 
     .workflow-title {
         color: #f8fafc;
@@ -336,10 +263,6 @@ def apply_home_design():
         font-size: 0.82rem;
         line-height: 1.6;
     }
-
-    /* ========================================
-       MODEL CONFIGURATION
-    ======================================== */
 
     .config-item {
         display: flex;
@@ -360,10 +283,6 @@ def apply_home_design():
         text-align: right;
     }
 
-    /* ========================================
-       FOOTER
-    ======================================== */
-
     .home-footer {
         text-align: center;
         padding: 28px 10px;
@@ -371,10 +290,6 @@ def apply_home_design():
         font-size: 0.82rem;
         line-height: 1.8;
     }
-
-    /* ========================================
-       STREAMLIT CONTROLS
-    ======================================== */
 
     [data-testid="stMetric"] {
         background: rgba(22, 32, 55, 0.85);
@@ -441,7 +356,6 @@ def section_header(title, description=""):
 def create_stat_card(
     title,
     value,
-    icon,
     color,
     description
 ):
@@ -449,7 +363,7 @@ def create_stat_card(
     render_html(dedent(f"""
         <div class="stat-card {color}">
             <div class="stat-label">
-                {icon} &nbsp; {title}
+                {title}
             </div>
             <div class="stat-value">
                 {value}
@@ -578,7 +492,7 @@ def show_hero():
     render_html(dedent("""
         <div class="hero-container">
             <div class="hero-badge">
-                🛡️ INTELLIGENT NETWORK SECURITY
+                INTELLIGENT NETWORK SECURITY
             </div>
             <div class="hero-title">
                 Network Intrusion<br>
@@ -594,16 +508,16 @@ def show_hero():
             </div>
             <div class="hero-bottom">
                 <div class="hero-feature">
-                    🤖 Random Forest AI
+                    Random Forest AI
                 </div>
                 <div class="hero-feature">
-                    🔍 Real-Time Detection
+                    Real-Time Detection
                 </div>
                 <div class="hero-feature">
-                    📊 Advanced Analytics
+                    Advanced Analytics
                 </div>
                 <div class="hero-feature">
-                    🔐 Network Protection
+                    Network Protection
                 </div>
             </div>
         </div>
@@ -613,7 +527,7 @@ def show_hero():
 
     with col2:
         if st.button(
-            "🚀 Analyze Your Network Traffic",
+            "Analyze Your Network Traffic",
             key="cta_upload",
             use_container_width=True,
             type="primary"
@@ -629,7 +543,7 @@ def show_hero():
 def show_dataset_overview(metadata):
 
     section_header(
-        "📁 Dataset Overview",
+        "Dataset Overview",
         "An overview of the data used to train and evaluate the intrusion detection model."
     )
 
@@ -651,7 +565,6 @@ def show_dataset_overview(metadata):
             format_number(
                 metadata.get("training_records", 0)
             ),
-            "📚",
             "purple",
             "Records used for model training"
         )
@@ -663,7 +576,6 @@ def show_dataset_overview(metadata):
             format_number(
                 metadata.get("testing_records", 0)
             ),
-            "🧪",
             "cyan",
             "Records used for model evaluation"
         )
@@ -675,7 +587,6 @@ def show_dataset_overview(metadata):
             format_number(
                 metadata.get("transformed_feature_count", 0)
             ),
-            "⚙️",
             "green",
             "Features after preprocessing"
         )
@@ -688,7 +599,7 @@ def show_dataset_overview(metadata):
 def show_model_performance(metrics):
 
     section_header(
-        "🎯 Model Performance",
+        "Model Performance",
         "Evaluate how effectively the machine learning model identifies network threats."
     )
 
@@ -712,7 +623,6 @@ def show_model_performance(metrics):
             format_percentage(
                 metrics.get("accuracy")
             ),
-            "🎯",
             "purple",
             "Overall classification correctness"
         )
@@ -724,7 +634,6 @@ def show_model_performance(metrics):
             format_percentage(
                 metrics.get("precision")
             ),
-            "🔍",
             "green",
             "Correctness of attack predictions"
         )
@@ -736,7 +645,6 @@ def show_model_performance(metrics):
             format_percentage(
                 metrics.get("recall")
             ),
-            "🛡️",
             "green",
             "Ability to detect actual attacks"
         )
@@ -748,7 +656,6 @@ def show_model_performance(metrics):
             format_percentage(
                 metrics.get("f1_score")
             ),
-            "📈",
             "purple",
             "Balance between precision and recall"
         )
@@ -793,7 +700,7 @@ def show_model_performance(metrics):
     st.markdown("---")
 
     section_header(
-        "🔍 Confusion Matrix",
+        "Confusion Matrix",
         "Visual representation of correct and incorrect model classifications."
     )
 
@@ -823,7 +730,7 @@ def show_model_performance(metrics):
 def show_training_information(metrics):
 
     section_header(
-        "⚙️ Training Information",
+        "Training Information",
         "Details about model training and prediction performance."
     )
 
@@ -844,7 +751,7 @@ def show_training_information(metrics):
         )
 
         st.metric(
-            "⏱️ Training Time",
+            "Training Time",
 
             (
                 f"{float(training_time):.2f} seconds"
@@ -860,7 +767,7 @@ def show_training_information(metrics):
         )
 
         st.metric(
-            "⚡ Prediction Time",
+            "Prediction Time",
 
             (
                 f"{float(prediction_time):.2f} seconds"
@@ -877,7 +784,7 @@ def show_training_information(metrics):
 def show_dataset_details(metadata):
 
     section_header(
-        "🗂️ Dataset Information",
+        "Dataset Information",
         "Explore the dataset structure and preprocessing configuration."
     )
 
@@ -904,7 +811,7 @@ def show_dataset_details(metadata):
         render_html(dedent(f"""
         <div class="glass-card">
             <div class="glass-card-title">
-                📂 Dataset Configuration
+                Dataset Configuration
             </div>
             <div class="config-item">
                 <span class="config-label">Dataset</span>
@@ -971,18 +878,18 @@ def show_dataset_details(metadata):
         render_html(dedent(f"""
         <div class="glass-card">
             <div class="glass-card-title">
-                🎯 Target & Preprocessing
+                Target & Preprocessing
             </div>
             <div class="config-item">
                 <span class="config-label">Class 0</span>
                 <span class="config-value">
-                    🟢 {benign_label}
+                    {benign_label}
                 </span>
             </div>
             <div class="config-item">
                 <span class="config-label">Class 1</span>
                 <span class="config-value">
-                    🔴 {attack_label}
+                    {attack_label}
                 </span>
             </div>
             <div class="config-item">
@@ -1014,7 +921,7 @@ def show_dataset_details(metadata):
 def show_workflow():
 
     section_header(
-        "🔄 How It Works",
+        "How It Works",
         "A simple four-step process for identifying malicious network traffic."
     )
 
@@ -1024,7 +931,6 @@ def show_workflow():
         (
             col1,
             "01",
-            "📤",
             "Upload Dataset",
             "Upload your network traffic CSV file through the detection interface."
         ),
@@ -1032,7 +938,6 @@ def show_workflow():
         (
             col2,
             "02",
-            "⚙️",
             "Preprocessing",
             "Clean and transform network data using the saved preprocessing pipeline."
         ),
@@ -1040,7 +945,6 @@ def show_workflow():
         (
             col3,
             "03",
-            "🤖",
             "AI Detection",
             "The Random Forest classifier analyzes traffic and predicts potential attacks."
         ),
@@ -1048,13 +952,12 @@ def show_workflow():
         (
             col4,
             "04",
-            "📊",
             "View Analytics",
             "Explore predictions, investigate suspicious records, and export reports."
         )
     ]
 
-    for column, number, icon, title, description in workflow:
+    for column, number, title, description in workflow:
 
         with column:
 
@@ -1062,9 +965,6 @@ def show_workflow():
             <div class="workflow-card">
                 <div class="workflow-number">
                     STEP {number}
-                </div>
-                <div class="workflow-icon">
-                    {icon}
                 </div>
                 <div class="workflow-title">
                     {title}
@@ -1083,7 +983,7 @@ def show_workflow():
 def show_model_details():
 
     section_header(
-        "🤖 Machine Learning Model",
+        "Machine Learning Model",
         "Technical configuration of the intrusion detection engine."
     )
 
@@ -1094,7 +994,7 @@ def show_model_details():
         render_html(dedent("""
         <div class="glass-card">
             <div class="glass-card-title">
-                🌳 Random Forest Classifier
+                Random Forest Classifier
             </div>
             <div class="glass-card-text">
                 The system uses a Random Forest classification
@@ -1116,7 +1016,7 @@ def show_model_details():
         render_html(dedent("""
         <div class="glass-card">
             <div class="glass-card-title">
-                ⚙️ Model Configuration
+                Model Configuration
             </div>
             <div class="config-item">
                 <span class="config-label">Algorithm</span>
@@ -1151,7 +1051,7 @@ def show_model_details():
 
     # MODEL FILES
 
-    st.markdown("#### 📦 Saved Model Files")
+    st.markdown("#### Saved Model Files")
 
     model_file = MODEL_DIR / "random_forest_ids.joblib"
 
@@ -1164,13 +1064,13 @@ def show_model_details():
         if model_file.exists():
 
             st.success(
-                "✅ random_forest_ids.joblib — Available"
+                "random_forest_ids.joblib — Available"
             )
 
         else:
 
             st.warning(
-                "⚠️ random_forest_ids.joblib — Not found"
+                "random_forest_ids.joblib — Not found"
             )
 
     with col2:
@@ -1178,13 +1078,13 @@ def show_model_details():
         if preprocessor_file.exists():
 
             st.success(
-                "✅ preprocessor.joblib — Available"
+                "preprocessor.joblib — Available"
             )
 
         else:
 
             st.warning(
-                "⚠️ preprocessor.joblib — Not found"
+                "preprocessor.joblib — Not found"
             )
 
 
@@ -1208,14 +1108,14 @@ def show():
 
     # 2. INTRODUCTION
     section_header(
-        "🛡️ Intelligent Network Protection",
+        "Intelligent Network Protection",
         "Machine learning-powered network intrusion detection and threat analysis."
     )
 
     render_html(dedent("""
     <div class="glass-card">
         <div class="glass-card-title">
-            🎯 What Does This System Do?
+            What Does This System Do?
         </div>
         <div class="glass-card-text">
             Network Intrusion Detection System (NIDS) is an
@@ -1268,7 +1168,7 @@ def show():
 
     # 9. FINAL CTA
     section_header(
-        "🚀 Ready to Secure Your Network?",
+        "Ready to Secure Your Network?",
         "Start analyzing network traffic and discover potential security threats."
     )
 
@@ -1277,7 +1177,7 @@ def show():
     with col2:
 
         if st.button(
-            "🛡️ Start Network Intrusion Detection",
+            "Start Network Intrusion Detection",
             key="home_bottom_cta",
             use_container_width=True,
             type="primary"
@@ -1288,7 +1188,7 @@ def show():
     # 10. FOOTER
     render_html(dedent("""
     <div class="home-footer">
-        🛡️ <b>Network Intrusion Detection System</b>
+        <b>Network Intrusion Detection System</b>
         <br>
         Intelligent Security • Machine Learning • Network Analytics
         <br><br>
