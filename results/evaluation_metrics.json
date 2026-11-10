@@ -1,0 +1,17 @@
+{
+    "model": "Random Forest",
+    "dataset": "UNSW-NB15",
+    "accuracy": 0.8711315162998591,
+    "precision": 0.8166678826791186,
+    "recall": 0.9876687549633812,
+    "f1_score": 0.8940652581972124,
+    "specificity": 0.7283513513513513,
+    "false_positive_rate": 0.2716486486486486,
+    "roc_auc": 0.9803887078753508,
+    "pr_auc": 0.9839309289068283,
+    "true_negative": 26949,
+    "false_positive": 10051,
+    "false_negative": 559,
+    "true_positive": 44773,
+    "total_testing_records": 82332
+}

@@ -1,0 +1,16 @@
+# Network Intrusion Detection System - Requirements
+# Machine Learning and Web Application Dependencies
+
+# Core ML libraries
+numpy>=1.24.0
+pandas>=2.0.0
+scikit-learn>=1.3.0
+scipy>=1.10.0
+joblib>=1.3.0
+
+# Web Application
+streamlit>=1.28.0
+plotly>=5.17.0
+
+# Optional: For better performance
+# openpyxl>=3.1.0  # For Excel file support if needed
