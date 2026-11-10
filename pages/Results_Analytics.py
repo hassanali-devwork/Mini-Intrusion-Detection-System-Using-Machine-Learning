@@ -1,21 +1,3 @@
-
-"""
-Premium Results & Analytics Dashboard
-Network Intrusion Detection System (NIDS)
-
-Features:
-- Modern cybersecurity dashboard UI
-- Premium dark glassmorphism design
-- Interactive analytics charts
-- Prediction summary cards
-- Model evaluation metrics
-- Confusion matrix
-- Classification report
-- Searchable and filterable results
-- CSV export functionality
-- Prediction error analysis
-"""
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -34,55 +16,28 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report
 )
-
-
-
-
-# ============================================================
-# SAFE HTML RENDERING
-# ============================================================
-
 def render_html(content):
     """Render HTML safely through Streamlit Markdown after removing indentation."""
     html_content = textwrap.dedent(str(content)).strip()
     st.markdown(html_content, unsafe_allow_html=True)
-
-
-# ============================================================
-# PAGE CONFIGURATION
-# ============================================================
 
 def apply_custom_design():
 
     st.markdown(textwrap.dedent("""
     <style>
 
-    /* Main application background */
     .stApp {
-        background:
-            radial-gradient(
-                ellipse at 10% 0%,
-                rgba(79, 70, 229, 0.12),
-                transparent 40%
-            ),
-            radial-gradient(
-                ellipse at 90% 20%,
-                rgba(6, 182, 212, 0.08),
-                transparent 40%
-            ),
-            #080d1a;
-
+        background: radial-gradient(ellipse at 10% 0%, rgba(79, 70, 229, 0.12), transparent 40%),
+                    radial-gradient(ellipse at 90% 20%, rgba(6, 182, 212, 0.08), transparent 40%),
+                    #080d1a;
         color: #e5e7eb;
     }
 
-    /* Main content spacing */
     .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
+        padding: 2rem 1rem 3rem;
         max-width: 1500px;
     }
 
-    /* Main title */
     .main-title {
         font-size: 2.7rem;
         font-weight: 800;
@@ -97,13 +52,11 @@ def apply_custom_design():
         margin-bottom: 25px;
     }
 
-    /* Section headings */
     .section-title {
         font-size: 1.45rem;
         font-weight: 750;
         color: #f1f5f9;
-        margin-top: 15px;
-        margin-bottom: 5px;
+        margin: 15px 0 5px;
     }
 
     .section-description {
@@ -112,23 +65,13 @@ def apply_custom_design():
         margin-bottom: 20px;
     }
 
-    /* KPI cards */
     .kpi-card {
-        background: linear-gradient(
-            145deg,
-            rgba(22, 32, 55, 0.95),
-            rgba(13, 20, 37, 0.95)
-        );
-
-        border: 1px solid rgba(148, 163, 184, 0.13);
+        background: linear-gradient(145deg, rgba(22, 32, 55, 0.95), rgba(13, 20, 37, 0.95));
+        border: 1px solid rgba(152, 163, 184, 0.13);
         border-radius: 18px;
-
         padding: 23px 20px;
-
         min-height: 145px;
-
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
-
         transition: all 0.25s ease;
     }
 
@@ -138,23 +81,13 @@ def apply_custom_design():
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
     }
 
-    .kpi-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 17px;
-    }
-
     .kpi-label {
         color: #a5b4c8;
         overflow-wrap: anywhere;
         word-break: break-word;
         font-size: 0.86rem;
         font-weight: 600;
-    }
-
-    .kpi-icon {
-        font-size: 1.4rem;
+        margin-bottom: 17px;
     }
 
     .kpi-value {
@@ -172,7 +105,6 @@ def apply_custom_design():
         margin-top: 7px;
     }
 
-    /* Accent colors */
     .purple {
         border-left: 4px solid #818cf8;
     }
@@ -189,7 +121,6 @@ def apply_custom_design():
         border-left: 4px solid #22d3ee;
     }
 
-    /* Dashboard panels */
     .dashboard-panel {
         background: rgba(17, 26, 46, 0.85);
         border: 1px solid rgba(148, 163, 184, 0.13);
@@ -197,7 +128,6 @@ def apply_custom_design():
         padding: 20px;
     }
 
-    /* Status labels */
     .status-normal {
         color: #34d399;
         font-weight: 700;
@@ -208,7 +138,6 @@ def apply_custom_design():
         font-weight: 700;
     }
 
-    /* Information banner */
     .info-banner {
         background: rgba(99, 102, 241, 0.10);
         border: 1px solid rgba(129, 140, 248, 0.25);
@@ -218,14 +147,8 @@ def apply_custom_design():
         margin-bottom: 20px;
     }
 
-    /* Download cards */
     .download-card {
-        background: linear-gradient(
-            145deg,
-            rgba(22, 32, 55, 0.95),
-            rgba(13, 20, 37, 0.95)
-        );
-
+        background: linear-gradient(145deg, rgba(22, 32, 55, 0.95), rgba(13, 20, 37, 0.95));
         border: 1px solid rgba(148, 163, 184, 0.15);
         border-radius: 15px;
         padding: 20px;
@@ -244,7 +167,6 @@ def apply_custom_design():
         color: #94a3b8;
     }
 
-    /* Metric styling */
     [data-testid="stMetric"] {
         background: rgba(22, 32, 55, 0.8);
         border: 1px solid rgba(148, 163, 184, 0.13);
@@ -260,7 +182,6 @@ def apply_custom_design():
         color: #f8fafc !important;
     }
 
-    /* Input controls */
     .stSelectbox label,
     .stTextInput label,
     .stMultiSelect label {
@@ -268,7 +189,6 @@ def apply_custom_design():
         font-weight: 600;
     }
 
-    /* Buttons */
     .stDownloadButton button {
         border-radius: 10px;
         min-height: 43px;
@@ -280,14 +200,11 @@ def apply_custom_design():
         transform: translateY(-2px);
     }
 
-    /* Divider */
     hr {
         border-color: rgba(148, 163, 184, 0.15);
-        margin-top: 25px;
-        margin-bottom: 25px;
+        margin: 25px 0;
     }
 
-    /* Tabs */
     .stTabs [data-baseweb="tab"] {
         color: #94a3b8;
         font-weight: 600;
@@ -297,7 +214,6 @@ def apply_custom_design():
         color: #a5b4fc !important;
     }
 
-    /* Dataframe */
     [data-testid="stDataFrame"] {
         border: 1px solid rgba(148, 163, 184, 0.15);
         border-radius: 12px;
@@ -376,21 +292,13 @@ def style_chart(fig, height=380):
 # KPI CARD
 # ============================================================
 
-def create_kpi_card(title, value, icon, color, description):
+def create_kpi_card(title, value, color, description):
 
     render_html(f"""
     <div class="kpi-card {color}">
 
-        <div class="kpi-header">
-
-            <div class="kpi-label">
-                {escape(str(title))}
-            </div>
-
-            <div class="kpi-icon">
-                {icon}
-            </div>
-
+        <div class="kpi-label">
+            {escape(str(title))}
         </div>
 
         <div class="kpi-value">
@@ -472,7 +380,7 @@ def show():
 
         render_html("""
         <div class="info-banner">
-            <b>📡 No prediction data available</b>
+            <b>No prediction data available</b>
             <br><br>
             Upload a network traffic dataset and run intrusion
             detection from the Upload & Detection page to view
@@ -518,7 +426,7 @@ def show():
     # --------------------------------------------------------
 
     section_header(
-        "📈 Prediction Overview",
+        "Prediction Overview",
         "A real-time snapshot of the analyzed network traffic."
     )
 
@@ -529,7 +437,6 @@ def show():
         create_kpi_card(
             "Total Records",
             f"{total_records:,}",
-            "📁",
             "purple",
             "Total analyzed network connections"
         )
@@ -539,7 +446,6 @@ def show():
         create_kpi_card(
             "Normal Traffic",
             f"{benign_count:,}",
-            "🟢",
             "green",
             f"{benign_percentage:.2f}% of total traffic"
         )
@@ -549,7 +455,6 @@ def show():
         create_kpi_card(
             "Malicious Traffic",
             f"{attack_count:,}",
-            "🚨",
             "red",
             f"{attack_percentage:.2f}% of total traffic"
         )
@@ -559,7 +464,6 @@ def show():
         create_kpi_card(
             "Attack Detection",
             f"{attack_percentage:.2f}%",
-            "🎯",
             "cyan",
             "Percentage classified as malicious"
         )
@@ -578,7 +482,7 @@ def show():
     # --------------------------------------------------------
 
     section_header(
-        "📊 Traffic Analytics",
+        "Traffic Analytics",
         "Visual insights into normal and malicious network activity."
     )
 
@@ -590,7 +494,7 @@ def show():
 
     with col1:
 
-        st.markdown("#### 🎯 Traffic Classification")
+        st.markdown("#### Traffic Classification")
 
         labels = ["Normal Traffic", "Malicious Traffic"]
         values = [benign_count, attack_count]
@@ -658,7 +562,7 @@ def show():
 
     with col2:
 
-        st.markdown("#### 📉 Attack Probability Distribution")
+        st.markdown("#### Attack Probability Distribution")
 
         if "attack_probability" in results.columns:
 
@@ -715,7 +619,7 @@ def show():
     # TRAFFIC DISTRIBUTION BAR CHART
     # --------------------------------------------------------
 
-    st.markdown("#### 📊 Network Traffic Breakdown")
+    st.markdown("#### Network Traffic Breakdown")
 
     traffic_df = pd.DataFrame({
         "Traffic Type": [
@@ -785,7 +689,7 @@ def show():
     if actual_labels_available:
 
         section_header(
-            "🎯 Model Performance",
+            "Model Performance",
             "Evaluate the intrusion detection model against actual labels."
         )
 
@@ -893,7 +797,7 @@ def show():
                 # PERFORMANCE COMPARISON
                 # ------------------------------------------------
 
-                st.markdown("#### 📈 Performance Metrics Comparison")
+                st.markdown("#### Performance Metrics Comparison")
 
                 metrics_df = pd.DataFrame({
                     "Metric": [
@@ -960,7 +864,7 @@ def show():
                 # ------------------------------------------------
 
                 section_header(
-                    "🔍 Confusion Matrix",
+                    "Confusion Matrix",
                     "Understand how accurately the model classifies each traffic category."
                 )
 
@@ -1030,7 +934,7 @@ def show():
                 # ------------------------------------------------
 
                 section_header(
-                    "📋 Classification Report",
+                    "Classification Report",
                     "Detailed precision, recall, and F1-score for each class."
                 )
 
@@ -1073,7 +977,7 @@ def show():
 
         render_html("""
         <div class="info-banner">
-            <b>ℹ️ Model evaluation is currently unavailable</b>
+            <b>Model evaluation is currently unavailable</b>
             <br><br>
             Actual ground-truth labels were not provided.
             Prediction analytics are available, but accuracy,
@@ -1088,7 +992,7 @@ def show():
     # --------------------------------------------------------
 
     section_header(
-        "📋 Detailed Prediction Results",
+        "Detailed Prediction Results",
         "Explore individual network traffic predictions and investigate suspicious activity."
     )
 
@@ -1117,7 +1021,7 @@ def show():
     with filter_col2:
 
         search_term = st.text_input(
-            "🔎 Search Records",
+            "Search Records",
 
             placeholder="Search values or column names...",
 
@@ -1178,7 +1082,7 @@ def show():
     render_html(
         f"""
         <div class="info-banner">
-            <b>📊 Search Results</b>
+            <b>Search Results</b>
             <br>
             Showing <b>{len(filtered_results):,}</b>
             out of <b>{total_records:,}</b> records.
@@ -1302,7 +1206,7 @@ def show():
     # --------------------------------------------------------
 
     section_header(
-        "💾 Export Center",
+        " Export Center",
         "Download prediction results for reporting, investigation, and further analysis."
     )
 
@@ -1314,7 +1218,7 @@ def show():
         <div class="download-card">
 
             <div class="download-title">
-                📁 Complete Prediction Report
+             Complete Prediction Report
             </div>
 
             <div class="download-description">
@@ -1327,7 +1231,7 @@ def show():
 
         st.download_button(
 
-            label="⬇️ Download Full Results CSV",
+            label=" Download Full Results CSV",
 
             data=dataframe_to_csv(results),
 
@@ -1350,7 +1254,7 @@ def show():
         <div class="download-card">
 
             <div class="download-title">
-                🚨 Suspicious Traffic Report
+                 Suspicious Traffic Report
             </div>
 
             <div class="download-description">
